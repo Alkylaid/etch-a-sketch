@@ -1,5 +1,22 @@
 const container = document.querySelector('.container');
 
+createMenu();
+createGrid();
+hover();
+
+function hover(){
+const squareHover = document.querySelectorAll('.square');
+
+squareHover.forEach((square) => {
+    square.addEventListener('mouseover', () => {
+        square.style.backgroundColor= 'black';
+    })
+})
+}
+
+
+
+function createGrid() {
 for (let i = 0; i < 16; i++) {
     const row = document.createElement('div');
     row.classList.add('row');
@@ -11,3 +28,7 @@ for (let i = 0; i < 16; i++) {
         row.appendChild(square);
     }
 }
+}
+
+
+
