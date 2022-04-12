@@ -31,4 +31,22 @@ for (let i = 0; i < 16; i++) {
 }
 
 
+function createMenu() {
+    const menu = document.createElement('div');
+    menu.classList.add('menu');
+    container.appendChild(menu);
+    const resetButton = document.createElement('button');
+    resetButton.innerHTML = 'Reset';
+    menu.appendChild(resetButton)
+    resetButton.addEventListener('click', reset);
+}
+
+function reset() {
+    const squareReset = document.querySelectorAll('.square');
+    squareReset.forEach((square) => {
+        square.removeAttribute('style');
+    })
+}
+
+
 
