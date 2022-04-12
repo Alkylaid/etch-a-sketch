@@ -4,12 +4,13 @@ createMenu();
 createGrid();
 hover();
 
+
 function hover(){
 const squareHover = document.querySelectorAll('.square');
 
 squareHover.forEach((square) => {
     square.addEventListener('mouseover', () => {
-        square.style.backgroundColor= 'black';
+        square.style.backgroundColor = generateRandomColor();
     })
 })
 }
@@ -48,5 +49,12 @@ function reset() {
     })
 }
 
+function generateRandomColor() {
+    const x = Math.floor(Math.random() * 256);
+    const y = Math.floor(Math.random() * 256);
+    const z = Math.floor(Math.random() * 256);
+    const color = "rgb(" + x + "," + y + "," + z + ")";
+    return color;
 
+}
 
