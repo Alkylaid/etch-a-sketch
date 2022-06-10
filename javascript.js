@@ -2,6 +2,8 @@ const container = document.querySelector('.container');
 const grid = document.querySelector('.grid');
 const slider = document.querySelector('.slider');
 const output = document.getElementById('pixel');
+const resetButton = document.querySelector('.reset');
+
 output.innerHTML = slider.value + "  x " + slider.value;
 
 createGrid(slider.value);
@@ -55,3 +57,7 @@ slider.oninput = function() {
     createGrid(this.value);
     hover();
 }
+
+resetButton.addEventListener("click", function() {
+    reset();
+})
