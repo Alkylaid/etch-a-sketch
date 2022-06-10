@@ -1,16 +1,25 @@
 const container = document.querySelector('.container');
 const grid = document.querySelector('.grid');
-//createMenu();
-createGrid(16, 16);
+const slider = document.querySelector('.slider');
+const output = document.getElementById('pixel');
+output.innerHTML = slider.value + "  x " + slider.value;
+
+createGrid(slider.value);
 hover();
 
-function createGrid(row, column) {
-    grid.style.gridTemplateColumns = `repeat(${row}, 1fr)`;
-    grid.style.gridTemplateRows = `repeat(${column}, 1fr)`;
-    for (i = 0; i < (row * column); i++) {
+function createGrid(size) {
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+    for (i = 0; i < (size * size); i++) {
         let square = document.createElement('div');
         grid.appendChild(square).className = "square";
     };
+}
+
+function clearGrid() {
+    while (grid.lastChild) {
+    grid.removeChild(grid.lastChild);
+    }
 }
 
 function hover() {
@@ -23,15 +32,6 @@ function hover() {
     })
 }
 
-function createMenu() {
-    const menu = document.createElement('div');
-    menu.classList.add('menu');
-    container.appendChild(menu);
-    const resetButton = document.createElement('button');
-    resetButton.innerHTML = 'Reset';
-    menu.appendChild(resetButton)
-    resetButton.addEventListener('click', reset);
-}
 
 function reset() {
     const squareReset = document.querySelectorAll('.square');
@@ -47,4 +47,11 @@ function generateRandomColor() {
     const color = "rgb(" + x + "," + y + "," + z + ")";
     return color;
 
+}
+
+slider.oninput = function() {
+    output.innerHTML = this.value + "  x " + this.value;
+    clearGrid();
+    createGrid(this.value);
+    hover();
 }
