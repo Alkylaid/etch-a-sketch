@@ -2,8 +2,10 @@ const container = document.querySelector('.container');
 const grid = document.querySelector('.grid');
 const slider = document.querySelector('.slider');
 const output = document.getElementById('pixel');
-const resetButton = document.querySelector('.reset');
-
+const resetButton = document.querySelector('.resetButton');
+const eraserButton = document.querySelector('.eraserButton');
+const randomButton = document.querySelector('.randomButton');
+let mode = 'black';
 output.innerHTML = slider.value + "  x " + slider.value;
 
 createGrid(slider.value);
@@ -29,7 +31,10 @@ function hover() {
 
     squareHover.forEach((square) => {
         square.addEventListener('mouseover', () => {
-            square.style.backgroundColor = generateRandomColor();
+            if (mode == 'black'){
+                square.style.backgroundColor = 'black';
+            } else if (mode == 'random'){
+            square.style.backgroundColor = generateRandomColor();}
         })
     })
 }
@@ -58,6 +63,10 @@ slider.oninput = function() {
     hover();
 }
 
-resetButton.addEventListener("click", function() {
-    reset();
-})
+resetButton.onclick = () => reset();
+randomButton.onclick = () => changeMode('random');
+
+function changeMode(newMode) {
+    mode = newMode;
+
+}
