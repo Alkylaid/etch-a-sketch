@@ -1,36 +1,27 @@
 const container = document.querySelector('.container');
-
-createMenu();
-createGrid();
+const grid = document.querySelector('.grid');
+//createMenu();
+createGrid(16, 16);
 hover();
 
+function createGrid(row, column) {
+    grid.style.gridTemplateColumns = `repeat(${row}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${column}, 1fr)`;
+    for (i = 0; i < (row * column); i++) {
+        let square = document.createElement('div');
+        grid.appendChild(square).className = "square";
+    };
+}
 
-function hover(){
-const squareHover = document.querySelectorAll('.square');
+function hover() {
+    const squareHover = document.querySelectorAll('.square');
 
-squareHover.forEach((square) => {
-    square.addEventListener('mouseover', () => {
-        square.style.backgroundColor = generateRandomColor();
+    squareHover.forEach((square) => {
+        square.addEventListener('mouseover', () => {
+            square.style.backgroundColor = generateRandomColor();
+        })
     })
-})
 }
-
-
-
-function createGrid() {
-for (let i = 0; i < 16; i++) {
-    const row = document.createElement('div');
-    row.classList.add('row');
-    container.appendChild(row);
-
-    for (let j = 0; j < 16; j++) {
-        const square = document.createElement('div');
-        square.classList.add('square');
-        row.appendChild(square);
-    }
-}
-}
-
 
 function createMenu() {
     const menu = document.createElement('div');
@@ -57,4 +48,3 @@ function generateRandomColor() {
     return color;
 
 }
-

@@ -1,20 +1,17 @@
-.container {
-    width: 960px;
-}
-
-
-.row {
+.container{
+    max-width: 500px;
     display: flex;
 
 }
 
-.square{
-    border: 1px solid gray;
-    height: 2.5rem;
-    width: 2.5rem;
+.grid {
+    width: 500px;
+    height: 500px;
+    display: grid;
 }
 
-.square:hover{
-color: black;
-    
+
+.square{
+    border: 1px solid gray;
 }
+
