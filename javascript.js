@@ -5,7 +5,10 @@ const output = document.getElementById('pixel');
 const resetButton = document.querySelector('.resetButton');
 const eraserButton = document.querySelector('.eraserButton');
 const randomButton = document.querySelector('.randomButton');
-let mode = 'black';
+const colorButton = document.querySelector('.colorButton');
+let mode;
+changeMode(`color`);
+
 output.innerHTML = slider.value + "  x " + slider.value;
 
 createGrid(slider.value);
@@ -31,8 +34,8 @@ function hover() {
 
     squareHover.forEach((square) => {
         square.addEventListener('mouseover', () => {
-            if (mode == 'black'){
-                square.style.backgroundColor = 'black';
+            if (mode == 'color'){
+                square.style.backgroundColor = document.getElementById('colorPicker').value;
             } else if (mode == 'random'){
             square.style.backgroundColor = generateRandomColor();}
         })
@@ -64,9 +67,26 @@ slider.oninput = function() {
 }
 
 resetButton.onclick = () => reset();
-randomButton.onclick = () => changeMode('random');
+colorButton.onclick = () => {
+    changeMode('color');
+}
+
+randomButton.onclick = () => {
+    changeMode('random');
+}
 
 function changeMode(newMode) {
     mode = newMode;
+    if (mode == 'color') {
+        document.querySelectorAll('.button-active').forEach((button) => {
+            button.classList.remove('button-active');
+        })
+        colorButton.classList.add('button-active');
+    } else if (mode == 'random') {
+        document.querySelectorAll('.button-active').forEach((button) => {
+            button.classList.remove('button-active');
+        })
+        randomButton.classList.add('button-active');
+    }
 
 }
