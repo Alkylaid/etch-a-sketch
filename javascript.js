@@ -29,6 +29,7 @@ function createGrid(size) {
     grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
     for (i = 0; i < (size * size); i++) {
         let square = document.createElement('div');
+        square.style.opacity = 0;
         grid.appendChild(square).className = "square";
     };
 }
@@ -43,14 +44,13 @@ function hover(e) {
     const squareHover = document.querySelectorAll('.square');
 
     squareHover.forEach((square) => {
-        square.style.opacity = 0.1;
         square.addEventListener('mouseover', () => {
-            if (!mouseDown) {
-                return;
-            }
+            if (mouseDown) {
+                
             if (increment) {
                 if (square.style.opacity < 1.0) {
                     square.style.opacity = parseFloat(square.style.opacity) + 0.10;
+                    console.log(square.style.opacity);
                 }
 
             } else if (decrement) {
@@ -70,7 +70,7 @@ function hover(e) {
                 square.style.backgroundColor = '#ffffff';
                 square.style.opacity = 0.1;
             }
-        })
+        }})
     })
 }
 
@@ -87,7 +87,7 @@ function reset() {
     document.querySelectorAll('.button-active').forEach((button) => {
         button.classList.remove('button-active');
     })
-    colorButton.classList.add('button-active');
+    changeMode('color');
     clearGrid();
     createGrid(slider.value);
     hover();
@@ -134,12 +134,8 @@ incrementButton.onclick = () => {
         decrement = false;
         incrementButton.classList.add('button-active');
         decrementButton.classList.remove('button-active');
-        const squares = document.querySelectorAll('.square');
-        squares.forEach((square) => {
-            if (square.style.opacity < 0.1) {
-                square.style.opacity = 0.1;
-            }
-        });
+        
+
     }
 }
 
