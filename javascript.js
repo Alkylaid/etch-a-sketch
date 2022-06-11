@@ -38,6 +38,9 @@ function hover() {
                 square.style.backgroundColor = document.getElementById('colorPicker').value;
             } else if (mode == 'random'){
             square.style.backgroundColor = generateRandomColor();}
+            else if (mode == 'eraser') {
+                square.style.backgroundColor = '#ffffff';
+            }
         })
     })
 }
@@ -75,18 +78,21 @@ randomButton.onclick = () => {
     changeMode('random');
 }
 
+eraserButton.onclick = () => {
+    changeMode('eraser');
+}
+
 function changeMode(newMode) {
     mode = newMode;
+    document.querySelectorAll('.button-active').forEach((button) => {
+        button.classList.remove('button-active');
+    })
     if (mode == 'color') {
-        document.querySelectorAll('.button-active').forEach((button) => {
-            button.classList.remove('button-active');
-        })
         colorButton.classList.add('button-active');
     } else if (mode == 'random') {
-        document.querySelectorAll('.button-active').forEach((button) => {
-            button.classList.remove('button-active');
-        })
         randomButton.classList.add('button-active');
+    } else if (mode == 'eraser') {
+        eraserButton.classList.add('button-active');
     }
 
 }
