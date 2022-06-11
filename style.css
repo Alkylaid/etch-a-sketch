@@ -45,11 +45,14 @@
     width: 800px;
     height: 800px;
     display: grid;
+    border: 1px solid gray;
+    
 }
 
 
 .square{
     border: 1px solid gray;
+    opacity: 0.1;
 }
 
 button{
@@ -84,6 +87,10 @@ button:hover{
 
 #colorPicker::-webkit-color-swatch-wrapper{
     border: none;
+    padding: 0;
     
-    
+}
+
+h1 {
+    font-size: 50px;
 }
