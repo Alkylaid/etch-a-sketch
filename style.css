@@ -70,3 +70,20 @@ button:hover{
     background: white;
 
 }
+
+#colorPicker{
+    width: 75px;
+    height: 75px;
+
+}
+
+#colorPicker::-webkit-color-swatch{
+    padding: 0px;
+    margin: 0;
+}
+
+#colorPicker::-webkit-color-swatch-wrapper{
+    border: none;
+    
+    
+}

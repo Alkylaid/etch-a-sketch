@@ -33,7 +33,9 @@ function hover() {
     const squareHover = document.querySelectorAll('.square');
 
     squareHover.forEach((square) => {
+        
         square.addEventListener('mouseover', () => {
+            
             if (mode == 'color'){
                 square.style.backgroundColor = document.getElementById('colorPicker').value;
             } else if (mode == 'random'){
@@ -51,6 +53,14 @@ function reset() {
     squareReset.forEach((square) => {
         square.removeAttribute('style');
     })
+    document.getElementById('colorPicker').value = "#000000";
+    slider.value = 16;
+    clearGrid();
+    createGrid(slider.value);
+    hover();
+    output.innerHTML = slider.value + "  x " + slider.value;
+    
+    
 }
 
 function generateRandomColor() {
