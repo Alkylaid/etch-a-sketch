@@ -82,6 +82,12 @@ function reset() {
     })
     document.getElementById('colorPicker').value = "#000000";
     slider.value = 16;
+    increment = false;
+    decrement = false;
+    document.querySelectorAll('.button-active').forEach((button) => {
+        button.classList.remove('button-active');
+    })
+    colorButton.classList.add('button-active');
     clearGrid();
     createGrid(slider.value);
     hover();
