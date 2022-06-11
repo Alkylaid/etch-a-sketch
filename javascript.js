@@ -7,9 +7,11 @@ const eraserButton = document.querySelector('.eraserButton');
 const randomButton = document.querySelector('.randomButton');
 const colorButton = document.querySelector('.colorButton');
 const incrementButton = document.querySelector('.incrementButton');
+const decrementButton = document.querySelector('.decrementButton');
 let mode;
 let mouseDown = false;
 let increment = false;
+let decrement = false;
 
 
 changeMode(`color`);
@@ -48,19 +50,25 @@ function hover(e) {
             }
             if (increment) {
                 if (square.style.opacity < 1.0) {
-                square.style.opacity = parseFloat(square.style.opacity) + 0.10; 
-                console.log(square.style.opacity);}
+                    square.style.opacity = parseFloat(square.style.opacity) + 0.10;
+                }
 
+            } else if (decrement) {
+                if (square.style.opacity > 0) {
+                    square.style.opacity = parseFloat(square.style.opacity) - 0.10;
+                }
             } else {
                 square.style.opacity = 1.0;
             }
-            if (mode == 'color') {             
+
+            if (mode == 'color') {
                 square.style.backgroundColor = document.getElementById('colorPicker').value;
             } else if (mode == 'random') {
                 square.style.backgroundColor = generateRandomColor();
             }
             else if (mode == 'eraser') {
                 square.style.backgroundColor = '#ffffff';
+                square.style.opacity = 0.1;
             }
         })
     })
@@ -116,17 +124,29 @@ incrementButton.onclick = () => {
         incrementButton.classList.remove('button-active');
         increment = false;
     } else {
-    increment = true;
-    incrementButton.classList.add('button-active');
-    const squares = document.querySelectorAll('.square');
-    squares.forEach((square) => {
-        if(square.style.opacity < 0.1) {
-            square.style.opacity = 0.1;
-        }
-    });
+        increment = true;
+        decrement = false;
+        incrementButton.classList.add('button-active');
+        decrementButton.classList.remove('button-active');
+        const squares = document.querySelectorAll('.square');
+        squares.forEach((square) => {
+            if (square.style.opacity < 0.1) {
+                square.style.opacity = 0.1;
+            }
+        });
     }
 }
-    
+
+decrementButton.onclick = () => {
+    if (decrement) {
+        decrementButton.classList.remove('button-active');
+        decrement = false;
+    }
+    decrement = true;
+    increment = false;
+    incrementButton.classList.remove('button-active');
+    decrementButton.classList.add('button-active');
+}
 
 
 function changeMode(newMode) {
@@ -134,8 +154,17 @@ function changeMode(newMode) {
     document.querySelectorAll('.button-active').forEach((button) => {
         button.classList.remove('button-active');
     })
+    if (increment) {
+        incrementButton.classList.add('button-active');
+    }
+    if (decrement) {
+        decrementButton.classList.add('button-active');
+    }
     if (mode == 'color') {
         colorButton.classList.add('button-active');
+        if (decrement) {
+            colorButton.classList.add('button-active');
+        }
     } else if (mode == 'random') {
         randomButton.classList.add('button-active');
     } else if (mode == 'eraser') {
